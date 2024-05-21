@@ -76,6 +76,7 @@ export default function Dashboard() {
             </p>
             <a href="#/Kanbas/Courses/1239/Home"> Go </a>
           </div>
+          </div>
           <div className="wd-dashboard-course">
           <img src="/images/machine_learning.jpg" width={200} />
           <div>
