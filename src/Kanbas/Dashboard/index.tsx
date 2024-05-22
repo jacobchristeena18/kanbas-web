@@ -5,7 +5,7 @@ export default function Dashboard() {
         <h2 id="wd-dashboard-published">Published Courses (12)</h2> <hr />
         <div id="wd-dashboard-courses">
           <div className="wd-dashboard-course">
-            <img src="/images/reactjs.jpg" width={200} />
+            <img src="/images/react.png" width={200} />
             <div>
               <a className="wd-dashboard-course-link"
                 href="#/Kanbas/Courses/1234/Home">
@@ -18,7 +18,7 @@ export default function Dashboard() {
             </div>
           </div>
           <div className="wd-dashboard-course">
-          <img src="/images/javascript.jpg" width={200} />
+          <img src="/images/javaScript.png" width={200} />
           <div>
             <a className="wd-dashboard-course-link" href="#/Kanbas/Courses/1235/Home">
               CS1235 JavaScript
@@ -30,7 +30,7 @@ export default function Dashboard() {
           </div>
         </div>
         <div className="wd-dashboard-course">
-          <img src="/images/html_css.jpg" width={200} />
+          <img src="/images/html&css.png" width={200} />
           <div>
             <a className="wd-dashboard-course-link" href="#/Kanbas/Courses/1236/Home">
               CS1236 HTML & CSS for Everyone
@@ -42,7 +42,7 @@ export default function Dashboard() {
           </div>
         </div>
         <div className="wd-dashboard-course">
-          <img src="/images/nodejs.jpg" width={200} />
+          <img src="/images/nodejs.png" width={200} />
           <div>
             <a className="wd-dashboard-course-link" href="#/Kanbas/Courses/1237/Home">
               CS1237 Node.js Basics
@@ -66,7 +66,7 @@ export default function Dashboard() {
           </div>
         </div>
         <div className="wd-dashboard-course">
-          <img src="/images/python.jpg" width={200} />
+          <img src="/images/python.png" width={200} />
           <div>
             <a className="wd-dashboard-course-link" href="#/Kanbas/Courses/1239/Home">
               CS1239 Python for Computer Engineers
@@ -78,7 +78,7 @@ export default function Dashboard() {
           </div>
           </div>
           <div className="wd-dashboard-course">
-          <img src="/images/machine_learning.jpg" width={200} />
+          <img src="/images/ML.jpg" width={200} />
           <div>
             <a className="wd-dashboard-course-link" href="#/Kanbas/Courses/1240/Home">
               CS1240 Machine Learning Masters
@@ -92,4 +92,5 @@ export default function Dashboard() {
         </div>
       </div>
   );}
+
   
