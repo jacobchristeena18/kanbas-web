@@ -11,19 +11,19 @@ export default function Assignments() {
         <ul id="wd-assignment-list">
           <li className="wd-assignment-list-item">
             <a className="wd-assignment-link"
-              href="#/Kanbas/Courses/1234/Assignments/123">
+              href="#/Kanbas/Courses/1234/Assignments/111">
               A1 - ENV + HTML
               </a>
           <span>Multiple Modules | Not available until May 6 at 12:00am | Due May 13 at 11:59pm | 100 pts</span>
         </li>
         <li className="wd-assignment-list-item">
-          <a className="wd-assignment-link" href="#/Kanbas/Courses/1234/Assignments/124">
+          <a className="wd-assignment-link" href="#/Kanbas/Courses/1234/Assignments/112">
             A2 - CSS & BOOTSTRAP
           </a>
           <span>Multiple Modules | Not available until May 13 at 12:00am | Due May 20 at 11:59pm | 100 pts</span>
         </li>
         <li className="wd-assignment-list-item">
-          <a className="wd-assignment-link" href="#/Kanbas/Courses/1234/Assignments/125">
+          <a className="wd-assignment-link" href="#/Kanbas/Courses/1234/Assignments/113">
             A3 - JAVASCRIPT + REACT
           </a>
           <span>Multiple Modules | Not available until May 20 at 12:00am | Due May 27 at 11:59pm | 100 pts</span>
