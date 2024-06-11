@@ -1,4 +1,5 @@
 import { FaSearch } from 'react-icons/fa';
+import '../../styles.css';
 
 export default function AssignmentSearch() {
   return (

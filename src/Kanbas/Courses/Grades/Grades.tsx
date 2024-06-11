@@ -1,100 +1,136 @@
 import React from 'react';
-import { Form, Table, Button, Dropdown } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Table, Form, Button, Container, Row, Col, InputGroup, Dropdown, DropdownButton } from 'react-bootstrap';
 import { FaFileImport, FaFileExport } from 'react-icons/fa';
-import './Grades.css';
+import { TbFilterSearch } from 'react-icons/tb';
+import { IoSettingsSharp } from 'react-icons/io5';
+import { BsSearch } from 'react-icons/bs';
+import '../../styles.css';
 
 export default function Grades() {
-  return (
-    <div className="container mt-4">
-      <div className="d-flex flex-column align-items-end mb-3">
-        <div className="d-flex justify-content-end w-100">
-          <Form.Group className="me-3">
-            <Form.Label>Student Names</Form.Label>
-            <Form.Control type="text" placeholder="Search Students" className="form-control" />
-          </Form.Group>
-          <Form.Group className="me-3">
-            <Form.Label>Assignment Names</Form.Label>
-            <Form.Control type="text" placeholder="Search Assignments" className="form-control" />
-          </Form.Group>
-          <Button variant="primary" className="align-self-end me-2">
-            Apply Filters
-          </Button>
-        </div>
-        <div className="d-flex justify-content-end w-100 mt-2">
-          <Button variant="secondary" className="me-2">
-            <FaFileImport /> Import
-          </Button>
-          <Dropdown>
-            <Dropdown.Toggle variant="secondary">
-              <FaFileExport /> Export
-            </Dropdown.Toggle>
-            <Dropdown.Menu>
-              <Dropdown.Item href="#">Export Option 1</Dropdown.Item>
-              <Dropdown.Item href="#">Export Option 2</Dropdown.Item>
-            </Dropdown.Menu>
-          </Dropdown>
-        </div>
-      </div>
-
-      <div className="table-responsive">
-        <Table striped bordered hover>
-          <thead>
-            <tr>
-              <th>Student Name</th>
-              <th>A1 SETUP</th>
-              <th>A2 HTML</th>
-              <th>A3 CSS</th>
-              <th>A4 BOOTSTRAP</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Jane Adams</td>
-              <td>100% </td>
-              <td>100%</td>
-              <td>100%</td>
-              <td>66.22%</td>
-            </tr>
-            <tr>
-              <td>Christina Allen</td>
-              <td>100%</td>
-              <td>100%</td>
-              <td>92.18%</td>
-              <td>100%</td>
-            </tr>
-            <tr>
-              <td>Samreen Ansari</td>
-              <td>100%</td>
-              <td>100%</td>
-              <td>100%</td>
-              <td>100%</td>
-            </tr>
-            <tr>
-              <td>Han Bao</td>
-              <td>100%</td>
-              <td>100%</td>
-              <td>
-                <Form.Control type="number" defaultValue="88.03" />
-              </td>
-              <td>98.99%</td>
-            </tr>
-            <tr>
-              <td>Mahi Sai Srinivas Bobbili</td>
-              <td>100%</td>
-              <td>96.67%</td>
-              <td>98.37%</td>
-              <td>100%</td>
-            </tr>
-            <tr>
-              <td>Siran Cao</td>
-              <td>100% </td>
-              <td>100%</td>
-              <td>100%</td>
-              <td>100%</td>
-            </tr>
-          </tbody>
-        </Table>
-      </div>
-    </div>
-  );
+    return (
+        <Container fluid className="p-3">
+            <Row className="mb-3">
+                <Col className="d-flex justify-content-end align-items-center">
+                    <Button variant="secondary" className="btn me-2">
+                        <FaFileImport /> Import
+                    </Button>
+                    <Dropdown className="me-2">
+                        <Dropdown.Toggle variant="secondary" id="dropdown-export-button">
+                            <FaFileExport /> Export
+                        </Dropdown.Toggle>
+                    </Dropdown>
+                    <Button variant="outline-secondary" className="btn">
+                        <IoSettingsSharp />
+                    </Button>
+                </Col>
+            </Row>
+            <Row className="mb-3">
+                <Col xs={12} md={5} className="mb-2 mb-md-0">
+                    <Form.Group>
+                        <Form.Label className="fw-bold">Student Names</Form.Label>
+                        <InputGroup>
+                            <InputGroup.Text><BsSearch /></InputGroup.Text>
+                            <Form.Control type="text" placeholder="Search Students" className="form-control" />
+                            <DropdownButton
+                                variant="outline-secondary"
+                                title=""
+                                id="input-group-dropdown-students"
+                                className="btn"
+                            >
+                                <div></div>
+                            </DropdownButton>
+                        </InputGroup>
+                    </Form.Group>
+                </Col>
+                <Col xs={12} md={5} className="mb-2 mb-md-0">
+                    <Form.Group>
+                        <Form.Label className="fw-bold">Assignment Names</Form.Label>
+                        <InputGroup>
+                            <InputGroup.Text><BsSearch /></InputGroup.Text>
+                            <Form.Control type="text" placeholder="Search Assignments" className="form-control" />
+                            <DropdownButton
+                                variant="outline-secondary"
+                                title=""
+                                id="input-group-dropdown-assignments"
+                                className="btn"
+                            >
+                                <div></div>
+                            </DropdownButton>
+                        </InputGroup>
+                    </Form.Group>
+                </Col>
+            </Row>
+            <Row className="mb-3">
+                <Col xs={12} className="d-flex justify-content-md-start">
+                    <Button variant="secondary" className="btn">
+                        <TbFilterSearch /> Apply Filters
+                    </Button>
+                </Col>
+            </Row>
+            <div className="table-responsive">
+                <Table striped bordered hover className="mb-0">
+                    <thead>
+                        <tr>
+                            <th>Student Name</th>
+                            <th>A1 SETUP<br />Out of 100</th>
+                            <th>A2 HTML<br />Out of 100</th>
+                            <th>A3 CSS<br />Out of 100</th>
+                            <th>A4 BOOTSTRAP<br />Out of 100</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td className="red-text">Jane Adams</td>
+                            <td>100%</td>
+                            <td>100%</td>
+                            <td>100%</td>
+                            <td>66.22%</td>
+                        </tr>
+                        <tr>
+                            <td className="red-text">Christina Allen</td>
+                            <td>100%</td>
+                            <td>100%</td>
+                            <td>92.18%</td>
+                            <td>100%</td>
+                        </tr>
+                        <tr>
+                            <td className="red-text">Sameera Ansari</td>
+                            <td>100%</td>
+                            <td>100%</td>
+                            <td>100%</td>
+                            <td>100%</td>
+                        </tr>
+                        <tr>
+                            <td className="red-text">Han Bao</td>
+                            <td>100%</td>
+                            <td>100%</td>
+                            <td>
+                                <Form.Control
+                                    type="text"
+                                    defaultValue="88.03%"
+                                    className="form-control p-1"
+                                />
+                            </td>
+                            <td>98.99%</td>
+                        </tr>
+                        <tr>
+                            <td className="red-text">Mahi Sai Srinivas Bobbili</td>
+                            <td>100%</td>
+                            <td>96.67%</td>
+                            <td>98.37%</td>
+                            <td>100%</td>
+                        </tr>
+                        <tr>
+                            <td className="red-text">Siran Cao</td>
+                            <td>100%</td>
+                            <td>100%</td>
+                            <td>100%</td>
+                            <td>100%</td>
+                        </tr>
+                    </tbody>
+                </Table>
+            </div>
+        </Container>
+    );
 }
