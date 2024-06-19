@@ -7,7 +7,30 @@ import { IoSettingsSharp } from 'react-icons/io5';
 import { BsSearch } from 'react-icons/bs';
 import '../../styles.css';
 
+import { useParams } from 'react-router';
+
+import { grades,enrollments,users,assignments } from '../../Database';
+
 export default function Grades() {
+    const {cid} = useParams();
+    const currentCourseAssignments = assignments.filter(a => a.course == cid)
+    const enrolledUsersId = enrollments.filter(e => e.course === cid).map(e => e.user);
+    const enrolledUsers = users.filter(u => enrolledUsersId.includes(u._id));
+    const userGrades = grades.filter(g => enrolledUsersId.includes(g.student));
+    const updatedUsers = enrolledUsers.map(user => {
+        const currUserGrade = userGrades.filter(g => g.student === user._id);
+    
+        const assignmentGrades = currUserGrade.reduce((acc, grade) => {
+            acc[grade.assignment] = grade.grade;
+            return acc;
+        }, {} as { [key: string]: any });
+    
+        return {
+            ...user,
+            assignment_grades: assignmentGrades,
+        };
+    });
+
     return (
         <Container fluid className="p-3">
             <Row className="mb-3">
@@ -68,7 +91,89 @@ export default function Grades() {
                     </Button>
                 </Col>
             </Row>
+
             <div className="table-responsive">
+            <Table striped bordered hover className="mb-0">
+                    <thead>
+                        <tr>
+                            <th>Student Name</th>
+                            {
+                                currentCourseAssignments.map(ca =>{
+                                    return(
+                                        <th>{ca._id} <br/> {ca.title} <br />Out of 100</th>
+                                    )
+                                })
+                            }
+                        </tr>
+                    </thead>
+                    <tbody>
+    {/* [
+    [
+        {
+            "_id": "1",
+            "student": "121",
+            "assignment": "A101",
+            "grade": "90"
+        },
+        {
+            "_id": "4",
+            "student": "121",
+            "assignment": "A102",
+            "grade": "92"
+        }
+    ],
+    [
+        {
+            "_id": "2",
+            "student": "122",
+            "assignment": "A101",
+            "grade": "91"
+        },
+        {
+            "_id": "5",
+            "student": "122",
+            "assignment": "A102",
+            "grade": "91"
+        }
+    ],
+    [
+        {
+            "_id": "3",
+            "student": "123",
+            "assignment": "A101",
+            "grade": "92"
+        },
+        {
+            "_id": "6",
+            "student": "123",
+            "assignment": "A102",
+            "grade": "90"
+        }
+    ]
+] */}
+
+
+                        {
+                            updatedUsers.map(user => {
+                                    return (<tr>
+                                        <td className="red-text">{user.username}</td>
+                                        {currentCourseAssignments.map(ca =>{
+                                            console.log(ca)
+                                            return (
+                                                <td>
+                                                    {user.assignment_grades[ca._id] ? user.assignment_grades[ca._id] : "-"}
+                                                </td> 
+                                            )
+                                        })
+                                        }
+                                     </tr>)
+                                })
+                        }
+                    </tbody>
+
+                    </Table>
+            </div>
+            {/* <div className="table-responsive">
                 <Table striped bordered hover className="mb-0">
                     <thead>
                         <tr>
@@ -130,7 +235,7 @@ export default function Grades() {
                         </tr>
                     </tbody>
                 </Table>
-            </div>
+            </div> */}
         </Container>
     );
 }
