@@ -1,21 +1,35 @@
-import { FaPlus } from 'react-icons/fa';
-import { IoEllipsisVertical } from 'react-icons/io5';
-import LessonControlButtons from './LessonControlButtons';
-import ModulesControlButtons from './ModulesControlButtons';
-import AssignmentSearch from './AssignmentSearch';
-import AssignmentView from './AssignmentView';
-import '../../styles.css';
+import { FaPlus } from "react-icons/fa";
+import { IoEllipsisVertical } from "react-icons/io5";
+import LessonControlButtons from "./LessonControlButtons";
+import ModulesControlButtons from "./ModulesControlButtons";
+import AssignmentSearch from "./AssignmentSearch";
+import AssignmentView from "./AssignmentView";
+import "../../styles.css";
+import { Assignment } from "./AssignmentType";
 
-export default function Assignments() {
+export default function Assignments({
+  assignments,
+  deleteAssignment,
+}: {
+  assignments: Assignment[];
+  deleteAssignment: Function;
+}) {
   return (
     <div id="wd-assignments" className="container">
       <div className="d-flex justify-content-between align-items-center mb-3">
         <AssignmentSearch />
         <div>
-          <button id="wd-add-assignment-group" className="btn me-2 btn-secondary">
+          <button
+            id="wd-add-assignment-group"
+            className="btn me-2 btn-secondary"
+          >
             <FaPlus /> Group
           </button>
-          <button id="wd-add-assignment" className="btn btn-danger">
+          <button id="wd-add-assignment" className="btn btn-danger" onClick={
+            () => {
+                window.location.href = window.location.href + "/new";
+            }
+          }>
             <FaPlus /> Assignment
           </button>
         </div>
@@ -27,7 +41,10 @@ export default function Assignments() {
           <IoEllipsisVertical className="fs-4" />
         </div>
       </div>
-      <AssignmentView />
+      <AssignmentView
+        assignments={assignments}
+        deleteAssignment={deleteAssignment}
+      />
     </div>
   );
 }
