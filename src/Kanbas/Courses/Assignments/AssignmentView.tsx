@@ -1,15 +1,10 @@
 import { useParams, Link } from "react-router-dom";
-import { FaCheckCircle, FaCircle, FaFileAlt, FaPen, FaTrash } from "react-icons/fa";
-import { IoEllipsisVertical } from "react-icons/io5";
-import { BsThreeDotsVertical, BsCircle, BsGripVertical } from "react-icons/bs";
-import * as db from "../../Database";
-import LessonControlButtons from "./LessonControlButtons";
-import ModulesControlButtons from "./ModulesControlButtons";
-import "../../styles.css";
-
+import { FaCheckCircle, FaFileAlt, FaPen, FaTrash } from "react-icons/fa";
+import { BsGripVertical } from "react-icons/bs";
+import { confirmAlert } from 'react-confirm-alert';
+import 'react-confirm-alert/src/react-confirm-alert.css';
 import assignmentsData from "../../Database/assignments.json";
 import { Assignment } from "./AssignmentType";
-import { FaTrashCan } from "react-icons/fa6";
 
 export default function AssignmentView({
   assignments,
@@ -23,6 +18,23 @@ export default function AssignmentView({
   const filteredAssignments = assignments.filter(
     (assignment) => assignment.course === cid
   );
+
+  const handleDelete = (id: string) => {
+    confirmAlert({
+      title: 'Confirm to delete',
+      message: 'Are you sure you want to delete this assignment?',
+      buttons: [
+        {
+          label: 'Yes',
+          onClick: () => deleteAssignment(id),
+        },
+        {
+          label: 'No',
+          onClick: () => {},
+        },
+      ],
+    });
+  };
 
   return (
     <ul id="wd-assignment-list" className="list-group">
@@ -55,24 +67,20 @@ export default function AssignmentView({
             <FaPen
               className="text-primary me-4"
               style={{ cursor: "pointer" }}
-              onClick={()=>
-                window.location.href = window.location.href + "/"+ assignment._id
+              onClick={() =>
+                window.location.href = window.location.href + "/" + assignment._id
               }
             />
 
-            <FaTrashCan
+            <FaTrash
               className="text-danger me-4"
               style={{ cursor: "pointer" }}
-              onClick={() => {
-                // popup dialog to confirm delete
-                deleteAssignment(assignment._id);
-              }}
+              onClick={() => handleDelete(assignment._id)}
             />
             <FaCheckCircle className="text-success me-2" />
           </div>
         </li>
       ))}
     </ul>
-
   );
 }
