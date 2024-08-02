@@ -23,6 +23,7 @@ export default function Modules() {
   const createModule = async (module: any) => {
     const newModule = await client.createModule(cid as string, module);
     dispatch(addModule(newModule));
+    await fetchModules();
   };
 
   const fetchModules = async () => {
@@ -58,7 +59,7 @@ export default function Modules() {
 
   const saveModule = async (module: any) => {
     const status = await client.updateModule(module);
-    dispatch(updateModule(module));
+    dispatch(updateModule(status));
   };
 
 

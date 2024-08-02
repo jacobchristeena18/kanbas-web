@@ -1,4 +1,4 @@
-import {addAssignment, deleteAssignment, updateAssignment} from "./Assignments/reducer";
+import { addAssignment, deleteAssignment, updateAssignment , setAssignment} from "./Assignments/reducer";
 import CoursesNavigation from "./Navigation";
 import Modules from "./Modules";
 import Home from "./Home";
@@ -9,12 +9,28 @@ import { Navigate, Route, Routes, useParams, useLocation } from "react-router";
 import { FaAlignJustify } from "react-icons/fa";
 import { courses } from "../Database";
 import { useDispatch, useSelector } from "react-redux";
+import {useEffect} from 'react';
+import client from "./Assignments/client";
 export default function Courses({ courses }: { courses: any[] }) {
   const { assignments } = useSelector((state: any) => state.assignmentreducer);
   const dispatch = useDispatch();
   const { cid } = useParams();
   const { pathname } = useLocation();
   const course = courses.find((course) => course._id === cid);
+
+  async function fetchNewDatas(){
+    try {
+      const modules = await client.findAssignmentsForCourse(cid as string);
+      dispatch(setAssignment(modules));
+    } catch (error) {
+      console.error("Error fetching assgnments:", error);
+    }
+  }
+  
+  useEffect(()=>{
+    fetchNewDatas();
+  },[]);
+
   return (
     <div id="wd-courses">
       <h2 className="text-danger">
@@ -36,8 +52,14 @@ export default function Courses({ courses }: { courses: any[] }) {
               element={
                 <Assignments
                   assignments={assignments}
-                  deleteAssignment={(assignmentId: string) =>
-                    dispatch(deleteAssignment(assignmentId))
+                  deleteAssignment={async (assignmentId: string) => {
+                    try {
+                      await client.deleteAssignment(assignmentId);
+                      dispatch(deleteAssignment(assignmentId))
+                    } catch (error) {
+                      console.log(error);
+                    }
+                  }
                   }
                 />
               }
@@ -46,11 +68,23 @@ export default function Courses({ courses }: { courses: any[] }) {
               path="Assignments/:id"
               element={
                 <AssignmentEditor
-                  addAssignment={(assignment: any) =>
-                    dispatch(addAssignment(assignment))
+                  addAssignment={async (assignment: any) => {
+                    try {
+                      const newAssignment = await client.createAssignment(assignment.course, assignment);
+                      dispatch(addAssignment(newAssignment))
+                    } catch (error) {
+                      console.log(error);
+                    }
                   }
-                  updateAssignment={(updatedAssignment: any) =>
-                    dispatch(updateAssignment(updatedAssignment))
+                  }
+                  updateAssignment={async (modifiedAssigment: any) => {
+                    try {
+                      await client.updateAssignment(modifiedAssigment);
+                      dispatch(updateAssignment(modifiedAssigment))
+                    } catch (error) {
+                      console.log(error);
+                    }
+                  }
                   }
                   assignments={assignments}
                 />
@@ -63,5 +97,4 @@ export default function Courses({ courses }: { courses: any[] }) {
     </div>
   );
 }
-  
-  
+
