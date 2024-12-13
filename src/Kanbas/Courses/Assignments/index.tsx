@@ -1,37 +1,33 @@
+import { FaPlus } from 'react-icons/fa';
+import { IoEllipsisVertical } from 'react-icons/io5';
+import LessonControlButtons from './LessonControlButtons';
+import ModulesControlButtons from './ModulesControlButtons';
+import AssignmentSearch from './AssignmentSearch';
+import AssignmentView from './AssignmentView';
+import '../../styles.css';
+
 export default function Assignments() {
-    return (
-      <div id="wd-assignments">
-        <input id="wd-search-assignment"
-               placeholder="Search for Assignments" />
-        <button id="wd-add-assignment-group">+ Group</button>
-        <button id="wd-add-assignment">+ Assignment</button>
-        <h3 id="wd-assignments-title">
-          ASSIGNMENTS 40% of Total <button>+</button>
-        </h3>
-        <ul id="wd-assignment-list">
-          <li className="wd-assignment-list-item">
-            <a className="wd-assignment-link"
-              href="#/Kanbas/Courses/1234/Assignments/111">
-              A1 - ENV + HTML
-              </a>
-          <span>Multiple Modules | Not available until May 6 at 12:00am | Due May 13 at 11:59pm | 100 pts</span>
-        </li>
-        <li className="wd-assignment-list-item">
-          <a className="wd-assignment-link" href="#/Kanbas/Courses/1234/Assignments/112">
-            A2 - CSS & BOOTSTRAP
-          </a>
-          <span>Multiple Modules | Not available until May 13 at 12:00am | Due May 20 at 11:59pm | 100 pts</span>
-        </li>
-        <li className="wd-assignment-list-item">
-          <a className="wd-assignment-link" href="#/Kanbas/Courses/1234/Assignments/113">
-            A3 - JAVASCRIPT + REACT
-          </a>
-          <span>Multiple Modules | Not available until May 20 at 12:00am | Due May 27 at 11:59pm | 100 pts</span>
-        </li>
-      </ul>
+  return (
+    <div id="wd-assignments" className="container">
+      <div className="d-flex justify-content-between align-items-center mb-3">
+        <AssignmentSearch />
+        <div>
+          <button id="wd-add-assignment-group" className="btn me-2 btn-secondary">
+            <FaPlus /> Group
+          </button>
+          <button id="wd-add-assignment" className="btn btn-danger">
+            <FaPlus /> Assignment
+          </button>
+        </div>
+      </div>
+      <div className="wd-assignments-header d-flex justify-content-between align-items-center mb-4">
+        <h3 id="wd-assignments-title">ASSIGNMENTS</h3>
+        <div className="d-flex align-items-center">
+          <span className="wd-assignment-percentage">40% of Total</span>
+          <IoEllipsisVertical className="fs-4" />
+        </div>
+      </div>
+      <AssignmentView />
     </div>
   );
 }
-
-  
-  
